@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  CAT_URL: "http://agl-developer-test.azurewebsites.net",
+  CAT_ENDPOINT: "/people.json"
 };
 
 /*
