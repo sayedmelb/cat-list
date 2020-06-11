@@ -1,1 +1,16 @@
 <p>cat-listing works!</p>
+
+<pre>{{sortedList|json}}</pre>
+
+<ul>
+    <li *ngFor="let recordType of sortedList">
+        {{ recordType.Type }}
+        <ul>
+            <li *ngFor="let record of recordType.List ">
+               
+                        {{record.name}}
+                
+            </li>
+        </ul>
+    </li>
+</ul>
