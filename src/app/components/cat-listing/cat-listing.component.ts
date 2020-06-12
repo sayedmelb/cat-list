@@ -20,7 +20,7 @@ export class CatListingComponent implements OnInit {
   isLoading : boolean = true;
   isNormalisedLoading: boolean = true;
   //import {t} from "./../../../assets/images/"
-
+title = "Cat listing";
 
   jsonDataStub: any = (stubObj as any).default; // this is for test
   constructor(private catServie: CatApiService) { }

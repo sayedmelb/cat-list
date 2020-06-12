@@ -44,4 +44,13 @@ describe('CatListingComponent', () => {
 
     expect(app).toBeTruthy();
   });
+
+  it('should have expected title', () => {
+    const fixture = TestBed.createComponent(CatListingComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(component.title).toBe('Cat listing');
+  });
+
+ 
+
 });
