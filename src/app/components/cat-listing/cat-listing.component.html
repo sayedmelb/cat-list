@@ -1,16 +1,41 @@
-<p>cat-listing works!</p>
+<div class="container">
+    <h1>Cat Listing</h1>
+    <p>This list below is based on Cat Listing in accending order using cloud api. </p>
+    <button (click)="RefreshData()" class="btn btn-primary">Reload</button>
+    <hr>
+</div>
+<div class="container warning-container" *ngIf="errorStatus">
+    <h1>Message Board</h1>
+    <span>{{errorMessage}}</span><br>
+    <span>Please cllick on Reload button after sometime..</span><br>
 
-<pre>{{sortedList|json}}</pre>
+    <hr>
+</div>
+<div class="container scroll-outer" *ngIf="!errorStatus">
+    The original Json Object ->
+    <div class="scroll-inner">
+        <pre>{{originalList|json}}</pre>
+    </div>
 
-<ul>
-    <li *ngFor="let recordType of sortedList">
-        {{ recordType.Type }}
+</div>
+<div class="dv-pad">
+    &nbsp;
+</div>
+<div class="container scroll-outer" *ngIf="!errorStatus">
+    The Normalized output in ascending order -->
+    <div class="scroll-inner">
         <ul>
-            <li *ngFor="let record of recordType.List ">
-               
+            <li *ngFor="let recordType of sortedList">
+                {{ recordType.Type }}
+                <ul>
+                    <li *ngFor="let record of recordType.List ">
+
                         {{record.name}}
-                
+
+                    </li>
+                </ul>
             </li>
         </ul>
-    </li>
-</ul>
+    </div>
+
+</div>
