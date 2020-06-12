@@ -1,6 +1,11 @@
 <div class="container">
-    <h1>Cat Listing</h1>
-    <p>This list below is based on Cat Listing in accending order using cloud api. </p>
+    <h3>Cat listing</h3>
+    <p>The list below is based on Cat Listing in accending order using cloud api. </p>
+    <!-- <div>
+        <img src="{{catLoading}}" class="cat-load" /> <span>loading api ....</span>
+    </div> -->
+    
+    
     <button (click)="RefreshData()" class="btn btn-primary">Reload</button>
     <hr>
 </div>
@@ -14,6 +19,9 @@
 <div class="container scroll-outer" *ngIf="!errorStatus">
     The original Json Object ->
     <div class="scroll-inner">
+        <div *ngIf="isLoading"> 
+            <img src="{{catLoading}}" class="cat-load" /> <span>loading api ....</span>
+        </div>
         <pre>{{originalList|json}}</pre>
     </div>
 
@@ -23,14 +31,17 @@
 </div>
 <div class="container scroll-outer" *ngIf="!errorStatus">
     The Normalized output in ascending order -->
-    <div class="scroll-inner">
+    <div class="scroll-inner shade">
+        <div *ngIf="isNormalisedLoading"> 
+            <img src="{{catLoading}}" class="cat-load" /> <span>normalising the json ....</span>
+        </div>
         <ul>
             <li *ngFor="let recordType of sortedList">
                 {{ recordType.Type }}
                 <ul>
                     <li *ngFor="let record of recordType.List ">
 
-                        {{record.name}}
+                        {{record.name}} 
 
                     </li>
                 </ul>

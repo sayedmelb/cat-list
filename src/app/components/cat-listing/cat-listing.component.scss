@@ -9,6 +9,10 @@ p {
   
   .scroll-inner {
     max-height:100%;overflow:auto;border:1px solid #786655;
+    background-color: lightgrey;
+  }
+  .shade {
+      background-color: lightgreen;
   }
   
   .dv-pad{
@@ -17,6 +21,10 @@ p {
   .warning-container {
     background-color: lightsalmon;
   
+  }
+  .cat-load {
+      width: 200px;
+      padding: 10px;
   }
   
   

@@ -16,12 +16,17 @@ export class CatListingComponent implements OnInit {
   sortedList: any = [];
   errorMessage = "";
   errorStatus: boolean = false;
+  catLoading : string = "";
+  isLoading : boolean = true;
+  isNormalisedLoading: boolean = true;
+  //import {t} from "./../../../assets/images/"
 
 
   jsonDataStub: any = (stubObj as any).default; // this is for test
   constructor(private catServie: CatApiService) { }
 
   ngOnInit(): void {
+    this.catLoading = "./../../../assets/images/catLoading.gif";
     this.getCatList();
   }
 
@@ -33,8 +38,10 @@ export class CatListingComponent implements OnInit {
         console.log('resp', resp);
         this.originalList = resp;
         console.log('this.ori', this.originalList);
+        this.isLoading = false;
 
         this.normaliseList(this.originalList);
+        this.isNormalisedLoading = false;
       },
       err => {
         console.log("http error", err);
@@ -112,6 +119,8 @@ export class CatListingComponent implements OnInit {
     this.errorStatus = false;
     this.originalList = [];
     this.sortedList = [];
+    this.isNormalisedLoading = true;
+    this.isLoading = true;
     this.getCatList();
 
   }
