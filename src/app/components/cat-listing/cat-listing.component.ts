@@ -1,32 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { CatApiService } from '../../services/cat-api.service';
 import forEach from 'lodash/forEach';
-import * as stubObj from "../cat-listing/stub-data.json";
+import * as stubObj from '../cat-listing/stub-data.json';
 import { orderList } from './../../shared/common-functions';
-
 
 @Component({
   selector: 'app-cat-listing',
   templateUrl: './cat-listing.component.html',
-  styleUrls: ['./cat-listing.component.scss']
+  styleUrls: ['./cat-listing.component.scss'],
 })
 export class CatListingComponent implements OnInit {
-
   originalList: any = [];
   sortedList: any = [];
-  errorMessage = "";
-  errorStatus: boolean = false;
-  catLoading: string = "";
-  isLoading: boolean = true;
-  isNormalisedLoading: boolean = true;
+  errorMessage = '';
+  errorStatus = false;
+  catLoading = '';
+  isLoading = true;
+  isNormalisedLoading = true;
 
-  title = "Cat listing";
+  title = 'Cat listing';
 
   jsonDataStub: any = (stubObj as any).default; // this is for test
-  constructor(private catServie: CatApiService) { }
+  constructor(private catServie: CatApiService) {}
 
   ngOnInit(): void {
-    this.catLoading = "./../../../assets/images/catLoading.gif";
+    this.catLoading = './../../../assets/images/catLoading.gif';
     this.getCatList();
   }
 
@@ -42,67 +40,55 @@ export class CatListingComponent implements OnInit {
       (error) => {
         this.errorStatus = true;
         this.errorMessage = error.statusText;
-
       }
-
-
     );
   }
 
   normaliseList(ArrayList: any) {
-    let maleList: any = [], femaleList: any = [];
+    const maleList: any = [];
+    const femaleList: any = [];
     let maleArrayNames = [];
     let femaleArrayNames = [];
 
-
     if (ArrayList && ArrayList.length > 0) {
-      forEach(ArrayList, record => {
-
-        let catList = record.pets?.filter(
-          pet => pet.type.toUpperCase() === 'CAT');
-
+      forEach(ArrayList, (record) => {
+        const catList = record.pets?.filter(
+          (pet) => pet.type.toUpperCase() === 'CAT'
+        );
 
         if (record.gender && record.gender.toUpperCase() === 'MALE') {
-          if (catList != null)
+          if (catList != null) {
             maleList.push(catList);
-
+          }
         } else {
-          if (catList != null)
+          if (catList != null) {
             femaleList.push(catList);
+          }
         }
-      }
-      );
-
+      });
     }
-    forEach(maleList, records => {
-      forEach(records, item => {
+    forEach(maleList, (records) => {
+      forEach(records, (item) => {
         maleArrayNames.push({ name: item.name });
       });
-
     });
-    forEach(femaleList, records => {
-      forEach(records, item => {
+    forEach(femaleList, (records) => {
+      forEach(records, (item) => {
         femaleArrayNames.push({ name: item.name });
       });
-
     });
 
     femaleArrayNames = orderList(femaleArrayNames);
     maleArrayNames = orderList(maleArrayNames);
 
-
     this.setSortedList(maleArrayNames, femaleArrayNames);
-
-
-
   }
 
-
   setSortedList(maleList, femaleList) {
-    let _newObjMale = { Type: "Male", List: maleList };
-    let _newObjFemale = { Type: "Female", List: femaleList };
-    this.sortedList.push(_newObjMale);
-    this.sortedList.push(_newObjFemale);
+    const newObjMale = { Type: 'Male', List: maleList };
+    const newObjFemale = { Type: 'Female', List: femaleList };
+    this.sortedList.push(newObjMale);
+    this.sortedList.push(newObjFemale);
   }
 
   RefreshData() {
@@ -112,9 +98,5 @@ export class CatListingComponent implements OnInit {
     this.isNormalisedLoading = true;
     this.isLoading = true;
     this.getCatList();
-
   }
-
-
-
 }

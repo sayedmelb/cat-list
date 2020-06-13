@@ -1,19 +1,13 @@
-import { Component } from '@angular/core';
-import { Router, ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  // title = 'cat-list';
- constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+export class AppComponent implements OnInit {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
- }
-
- ngOnInit() {
-   
- }
-
+  ngOnInit() {}
 }

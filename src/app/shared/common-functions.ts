@@ -1,5 +1,5 @@
-import  orderBy  from 'lodash/orderBy';
+import orderBy from 'lodash/orderBy';
 
 export function orderList(list: any) {
-    return  orderBy(list, ['name'], ['asc']);  
+  return orderBy(list, ['name'], ['asc']);
 }

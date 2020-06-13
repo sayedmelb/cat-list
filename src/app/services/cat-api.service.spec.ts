@@ -4,12 +4,9 @@ import { CatApiService } from './cat-api.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpTestingController } from '@angular/common/http/testing';
-import * as stubObj from "../components/cat-listing/stub-data.json";
+import * as stubObj from '../components/cat-listing/stub-data.json';
 import { environment } from '../../environments/environment';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-
-
 
 describe('CatApiService', () => {
   let service: CatApiService;
@@ -19,30 +16,28 @@ describe('CatApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [CatApiService, HttpClientTestingModule, HttpTestingController]
+      providers: [
+        CatApiService,
+        HttpClientTestingModule,
+        HttpTestingController,
+      ],
     });
     service = TestBed.inject(CatApiService);
-    httpMock = TestBed.get(HttpTestingController);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('service api should be created', () => {
     expect(service).toBeTruthy();
   });
 
-
-  it('the data array returned from AGL cloud api expected to be having elements',
-    (done: DoneFn) => {
-      service.getCatListing().subscribe(data => {
-        expect(data.length).toBeGreaterThan(0);
-        done();
-      });
+  it('the data array returned from AGL cloud api expected to be having elements', (done: DoneFn) => {
+    service.getCatListing().subscribe((data) => {
+      expect(data.length).toBeGreaterThan(0);
+      done();
     });
+  });
 
- 
   afterEach(() => {
     TestBed.resetTestingModule();
-   
-});
-
-
+  });
 });

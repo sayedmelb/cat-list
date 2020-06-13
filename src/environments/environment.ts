@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  CAT_URL: "http://agl-developer-test.azurewebsites.net",
-  CAT_ENDPOINT: "/people.json"
+  CAT_URL: 'http://agl-developer-test.azurewebsites.net',
+  CAT_ENDPOINT: '/people.json'
 };
 
 /*
