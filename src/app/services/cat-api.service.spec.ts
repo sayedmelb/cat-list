@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpTestingController } from '@angular/common/http/testing';
 import * as stubObj from "../components/cat-listing/stub-data.json";
 import { environment } from '../../environments/environment';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
 
@@ -18,7 +19,7 @@ describe('CatApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [CatApiService, HttpTestingController]
+      providers: [CatApiService, HttpClientTestingModule, HttpTestingController]
     });
     service = TestBed.inject(CatApiService);
     httpMock = TestBed.get(HttpTestingController);
@@ -37,10 +38,11 @@ describe('CatApiService', () => {
       });
     });
 
-  // it('service api should be GET method', () => {
-  //   const request = httpMock.expectOne('http://agl-developer-test.azurewebsites.net/people.json');
-  //   expect(request.request.method).toEqual('GET');
-  // });
+ 
+  afterEach(() => {
+    TestBed.resetTestingModule();
+   
+});
 
 
 });

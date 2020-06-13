@@ -1,11 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { orderList } from './common-functions';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpTestingController } from '@angular/common/http/testing';
 import * as stubObj from "../components/cat-listing/stub-data.json";
-import { environment } from '../../environments/environment';
 
 
 

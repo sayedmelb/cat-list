@@ -2,11 +2,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CatListingComponent } from './cat-listing.component';
 import { CatApiService } from '../../services/cat-api.service';
-import {DebugElement} from '@angular/core';
+import { DebugElement, inject } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import * as stubObj from "./stub-data.json";
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { componentFactoryName } from '@angular/compiler';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpTestingController } from '@angular/common/http/testing';
 
-let catService : CatApiService;
+let catService: CatApiService;
 
 describe('CatListingComponent', () => {
   let component: CatListingComponent;
@@ -15,20 +22,17 @@ describe('CatListingComponent', () => {
 
   beforeEach(async(() => {
 
-    // Create jasmine spy object 
-    //catService = jasmine.createSpyObj('CatApiService', 'getCatListing');
-    // Provide the dummy/mock data to sortNumberData method.
-    //sortServiceSpy.getCatListing.returnValue([someRandomArray]);
+
 
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [ CatListingComponent ],
-      providers: [CatApiService, HttpClient, HttpHandler],
+      imports: [RouterTestingModule, HttpClientModule],
+      declarations: [CatListingComponent],
+      providers: [CatApiService, HttpClientTestingModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
-  
+
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CatListingComponent);
@@ -51,6 +55,77 @@ describe('CatListingComponent', () => {
     expect(component.title).toBe('Cat listing');
   });
 
- 
+  it('setSortedList should return equal to combinedList', () => {
+    const fixture = TestBed.createComponent(CatListingComponent);
+    const app = fixture.debugElement.componentInstance;
+    let maleList = [{ name: "Garfield" },
+    { name: "Jim" }
+
+    ];
+    let femaleList = [{ name: "Simba" },
+    { name: "Tabby" }
+
+    ];
+
+    let combineList = [
+      {Type: "Male", List: [{ name: "Garfield" },
+      { name: "Jim" }]},
+      {Type: "Female", List: [{ name: "Simba" },
+      { name: "Tabby" }]}
+    ];
+     component.setSortedList(maleList,femaleList);
+
+    expect(component.sortedList.length).toBeGreaterThan(0);
+  });
+
+
+
+  it('the data array returned from AGL API cloud return value',
+    (done: DoneFn) => {
+      catService.getCatListing().subscribe(data => {
+        expect(data.length).toBeGreaterThan(0);
+        done();
+      });
+    });
+
+  it('the originalList should have value',
+    (done: DoneFn) => {
+      catService.getCatListing().subscribe(data => {
+        expect(component.originalList.length).toBeGreaterThan(0);
+        done();
+      });
+    });
+
+  it('the sortedList should have value',
+    (done: DoneFn) => {
+      catService.getCatListing().subscribe(data => {
+        expect(component.sortedList.length).toBeGreaterThan(0);
+        done();
+      });
+    });
+
+  it('isLoading should be false after data gets loaded',
+    (done: DoneFn) => {
+      catService.getCatListing().subscribe(data => {
+        expect(component.isLoading).toEqual(false);
+        done();
+      });
+    });
+
+  it('isNormalisedLoading should be false after data gets loaded',
+    (done: DoneFn) => {
+      catService.getCatListing().subscribe(data => {
+        expect(component.isLoading).toEqual(false);
+        done();
+      });
+    });
+
+    afterEach(() => {
+      TestBed.resetTestingModule();
+  });
+
 
 });
+
+
+
