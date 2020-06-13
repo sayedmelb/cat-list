@@ -50,3 +50,6 @@ Feedback will be appreciated
 
 Currently stackblitz is in-compatible with Angular 9 so sink with stackblitz will not work
 
+Just clone and work with the application. routing concept enabled
+
+
